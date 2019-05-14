@@ -17,17 +17,19 @@ public class Player {
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     private String firstName;
+
     private String lastName;
+
     private String email;
+
+    private String password;
+
+    @OneToMany(mappedBy="partidaPlayer", fetch=FetchType.EAGER)
+    private Set<GamePlayer> gamePlayers;
+
+    @OneToMany(mappedBy="playerId", fetch=FetchType.EAGER)
+    private Set<Score> scores;
 
     public Player() { }
 
@@ -46,11 +48,12 @@ public class Player {
         this.email = mail;
     }
 
-    @OneToMany(mappedBy="partidaPlayer", fetch=FetchType.EAGER)
-    private Set<GamePlayer> gamePlayers;
-
-    @OneToMany(mappedBy="playerId", fetch=FetchType.EAGER)
-    private Set<Score> scores;
+    public Player(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -85,6 +88,13 @@ public class Player {
         gamePlayers.add(gamePlayer);
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public Set<Score> getScores() {
         return scores;
@@ -113,5 +123,13 @@ public class Player {
 
     public long getDraws(Set<Score> scores){
         return scores.stream().filter(score -> score.getScore() == 0.5).count();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

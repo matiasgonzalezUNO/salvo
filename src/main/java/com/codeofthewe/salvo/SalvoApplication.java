@@ -1,13 +1,21 @@
 package com.codeofthewe.salvo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @SpringBootApplication
@@ -23,13 +31,7 @@ public class SalvoApplication {
 			Date date = new Date();
 			// save a couple of customers
 
-			/*Player p2 = new Player("sebas", "bullian");
-			repositoryPlayer.save(p2);
-			Game g2 = new Game(date);
-			repositoryGame.save(g2);
-			repositoryGamePlayer.save(new GamePlayer(p2,g2));*/
-
-
+			/*
 			Player p1 = new Player("Lucas", "carri", "Lcarri@gmail");
 			repositoryPlayer.save(p1);
 			Player p2 = new Player("jet", "black", "JBlack@gmail");
@@ -125,13 +127,66 @@ public class SalvoApplication {
 			Score Score4 = new Score(p3, g2, (float)0.5, date);
 			scoreRepository.save(Score4);
 
+			 */
 
 
-			/*GamePlayer gp2 = new GamePlayer();
-			repositoryGamePlayer.save(gp2);
-			p1.addGamePlayer(gp2);*/
-			//no funciona agregar
+			// *-*-*-*-*-*-*-*-*-*-*Program INTRODUCCIÓN JAVA 1 -*-*-*-*-*-*-*-*-*-*-*-*
+			Player p1 = new Player("Jack", "Bauer", "j.bauer@ctu.gov","24");
+			repositoryPlayer.save(p1);
+
+			Player p2 = new Player("Chloe", " O'Brian", "c.obrian@ctu.gov","42");
+			repositoryPlayer.save(p2);
+
+			Player p3 = new Player("Kim", "Bauer", "kim_bauer@gmail.com","kb");
+			repositoryPlayer.save(p3);
+
+			Player p4 = new Player("Tony", "Almeida", "t.almeida@ctu.gov","mole");
+			repositoryPlayer.save(p4);
+
+
 
 		};
 	}
+}
+
+@Configuration
+class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
+
+	@Autowired
+	PlayerRepository playerRepository;
+
+	@Override
+	public void init(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(inputName-> {
+			Player player = playerRepository.findByEmail(inputName);
+			if (player != null) {
+				return new User(player.getEmail(), player.getPassword(),
+						AuthorityUtils.createAuthorityList("USER"));
+			} else {
+				throw new UsernameNotFoundException("Unknown user: " + inputName);
+			}
+		});
+	}
+}
+
+@Configuration
+@EnableWebSecurity
+class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers("/admin/**").hasAuthority("ADMIN")
+				.antMatchers("/**").hasAuthority("USER")
+				.and()
+				.formLogin()
+
+		//http.formLogin()
+				.usernameParameter("name")
+				.passwordParameter("pwd")
+				.loginPage("/api/login");
+
+		http.logout().logoutUrl("/api/logout");
+	}
+
+
 }
