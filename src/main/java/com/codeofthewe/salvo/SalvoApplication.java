@@ -35,7 +35,10 @@ public class SalvoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner initData(PlayerRepository repositoryPlayer, GameRepository repositoryGame, GamePlayerRepository repositoryGamePlayer, ShipRepository shipRepository, SalvoRepository salvoRepository, ScoreRepository scoreRepository, PasswordEncoder passwordEncoder ) {
+	public CommandLineRunner initData(PlayerRepository repositoryPlayer, GameRepository repositoryGame,
+									  GamePlayerRepository repositoryGamePlayer, ShipRepository shipRepository,
+									  SalvoRepository salvoRepository, ScoreRepository scoreRepository,
+									  PasswordEncoder passwordEncoder ) {
 		return (args) -> {
 
 			// save a couple of customers
@@ -312,6 +315,8 @@ public class SalvoApplication {
 			Salvo salvo4 = new Salvo(2, gp2, listSalvo_4);
 			salvoRepository.save(salvo4);
 
+
+
 		};
 	}
 
@@ -347,36 +352,23 @@ class WebSecurityConfiguration extends GlobalAuthenticationConfigurerAdapter {
 @EnableWebSecurity
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().fullyAuthenticated().
-                and().httpBasic();
-    }*/
 
-    /*@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/**").hasAuthority("USER")
-				.and()
-				.formLogin()
-				.usernameParameter("name")
-				.passwordParameter("pwd")
-				.loginPage("/app/login");
-
-		http.logout().logoutUrl("/app/logout");
-	}*/
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/rest")
-				.permitAll()
-				.anyRequest()
-				.fullyAuthenticated()
-				.and()
+		http
 				.formLogin()
 				.usernameParameter("username")
 				.passwordParameter("password")
 				.loginPage("/api/login");
+
+		http.authorizeRequests()
+				.antMatchers( "/web/games_3.html").permitAll()
+				.antMatchers( "/web/**").permitAll()
+				.antMatchers( "/api/games.").permitAll()
+				.antMatchers( "/api/players").permitAll()
+				.antMatchers( "/api/game_view/*").hasAuthority("user")
+				.antMatchers( "/rest/*").denyAll()
+				.anyRequest().permitAll();
 
 		http.logout().logoutUrl("/api/logout")
 				.permitAll();
@@ -405,3 +397,23 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 }
+
+
+/*@Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests().anyRequest().fullyAuthenticated().
+                and().httpBasic();
+    }*/
+
+    /*@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers("/**").hasAuthority("USER")
+				.and()
+				.formLogin()
+				.usernameParameter("name")
+				.passwordParameter("pwd")
+				.loginPage("/app/login");
+
+		http.logout().logoutUrl("/app/logout");
+	}*/

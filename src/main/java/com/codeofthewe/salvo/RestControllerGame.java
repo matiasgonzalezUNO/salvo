@@ -1,9 +1,13 @@
 package com.codeofthewe.salvo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,14 +24,82 @@ public class RestControllerGame {
     private GamePlayerRepository repositoryGamePlayer;
     @Autowired
     private PlayerRepository playerRepository;
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @RequestMapping(path = "/players", method = RequestMethod.POST)
+    public ResponseEntity<String> loguear(@RequestParam String username, @RequestParam String password) {
+        if (username.isEmpty()) {
+            return new ResponseEntity<>("No name given", HttpStatus.FORBIDDEN);
+        }
+        Player player = playerRepository.findByEmail(username);
+        if (player != null) {
+            return new ResponseEntity<>("Name already used", HttpStatus.CONFLICT);
+        }
+
+        playerRepository.save(new Player(username,passwordEncoder.encode(password)));
+        return new ResponseEntity<>("Named added", HttpStatus.CREATED);
+
+
+    }
 
     @RequestMapping("/games")
+    public Map<String, Object> makeLogeedPlayer(Authentication authentication) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        Player authenticatedPlayer = getAuthentication(authentication);
+        if(authenticatedPlayer == null){
+            dto.put("player","guest");
+            dto.put("games",dameTodosLosjuegos());
+        } else {
+            dto.put("player",loggedPlayerDTO(authenticatedPlayer));
+            dto.put("games",dameTodosLosjuegos());
+        }
+
+        return  dto;
+    }
+
     public List<Object> dameTodosLosjuegos() {
         return repositoryGame.findAll().stream().map(game -> armarGamesToDTO(game)).collect(toList());
 
     }
 
     private Map<String, Object> armarGamesToDTO(Game game){
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("id", game.getId());
+        dto.put("crationDate", game.getCreationDate().getTime());
+        dto.put("gamePlayers", game.getGamePlayers()
+                .stream()
+                .map(gamePlayer -> armarGamePlayersToDTO(gamePlayer))
+                .collect(toList()));
+        dto.put("Separacion de games","*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
+        return dto;
+    }
+
+    private Player getAuthentication(Authentication authentication) {
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return null;
+        } else {
+            return (playerRepository.findByEmail(authentication.getName()));
+        }
+    }
+
+    private Map<String, Object> loggedPlayerDTO(Player player) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("id", player.getId());
+        dto.put("name",player.getEmail());
+        return dto;
+    }
+
+    private List<Map<String, Object>> loggedPlayerGetGameDTO(Set<Game> games) {
+        /*List<Map<String, Object>> dto = new ArrayList<>();
+        dto.put("id", player.getId());
+        dto.put("name",player.getEmail());
+        return dto;*/
+        return games.stream().map(gamesLogPlayer -> armarGamesLogPlayerToDTO(gamesLogPlayer)).collect(Collectors.toList());
+    }
+
+    private Map<String, Object> armarGamesLogPlayerToDTO(Game game){
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("id", game.getId());
         dto.put("crationDate", game.getCreationDate().getTime());
@@ -79,7 +151,7 @@ public class RestControllerGame {
         Map<String, Object> dto2 = new LinkedHashMap<String, Object>();
         dto2.put("id", gamePlayer.getId());
         dto2.put("FechaGamePlayer", gamePlayer.getJoinDate());
-        dto2.put("player", gamePlayer.getPartidaPlayer());
+        dto2.put("player", armarPlayerToDTO(gamePlayer.getPartidaPlayer())); //.forEach(gamePlayer -> myList.addAll(armarSalvoList(gamePlayer.getGamePlayerIdOfSalvo())))
 
         return dto2;
     }
@@ -142,3 +214,24 @@ public class RestControllerGame {
         return juegos;
     }
 */
+
+/*
+    //viejo codigo /games
+    @RequestMapping("/games")
+    public List<Object> dameTodosLosjuegos() {
+        return repositoryGame.findAll().stream().map(game -> armarGamesToDTO(game)).collect(toList());
+
+    }
+
+    private Map<String, Object> armarGamesToDTO(Game game){
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("id", game.getId());
+        dto.put("crationDate", game.getCreationDate().getTime());
+        dto.put("gamePlayers", game.getGamePlayers()
+                .stream()
+                .map(gamePlayer -> armarGamePlayersToDTO(gamePlayer))
+                .collect(toList()));
+        return dto;
+    }
+
+     */

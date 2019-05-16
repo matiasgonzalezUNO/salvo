@@ -37,9 +37,9 @@ public class Player {
         this.firstName = first1;
     }
 
-    public Player(String first, String last) {
-        this.firstName = first;
-        this.lastName = last;
+    public Player(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public Player(String first, String last, String mail) {
