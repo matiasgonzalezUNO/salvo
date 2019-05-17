@@ -367,7 +367,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers( "/api/games.").permitAll()
 				.antMatchers( "/api/players").permitAll()
 				.antMatchers( "/api/game_view/*").hasAuthority("user")
-				.antMatchers( "/rest/*").denyAll()
+				.antMatchers( "/rest").denyAll()
 				.anyRequest().permitAll();
 
 		http.logout().logoutUrl("/api/logout")

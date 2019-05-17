@@ -49,7 +49,7 @@ public class RestControllerGame {
         authentication = SecurityContextHolder.getContext().getAuthentication();
         Player authenticatedPlayer = getAuthentication(authentication);
         if(authenticatedPlayer == null){
-            dto.put("player","guest");
+            dto.put("player","Guest");
             dto.put("games",dameTodosLosjuegos());
         } else {
             dto.put("player",loggedPlayerDTO(authenticatedPlayer));
@@ -67,14 +67,31 @@ public class RestControllerGame {
     private Map<String, Object> armarGamesToDTO(Game game){
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("id", game.getId());
-        dto.put("crationDate", game.getCreationDate().getTime());
+        dto.put("created", game.getCreationDate().getTime());
         dto.put("gamePlayers", game.getGamePlayers()
                 .stream()
                 .map(gamePlayer -> armarGamePlayersToDTO(gamePlayer))
                 .collect(toList()));
+        dto.put("scores", makeListGamesScores(game.getScores()));
         dto.put("Separacion de games","*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
         return dto;
     }
+
+    //Task 5-start
+    public List<Object> makeListGamesScores(Set<Score> scores) {
+        return scores
+                .stream()
+                .map(score -> makeScoreDTO(score))
+                .collect(Collectors.toList());
+    }
+    private Map<String, Object> makeScoreDTO(Score score) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("playerID", score.getPlayerId().getId());
+        dto.put("score", score.getScore());
+        dto.put("finishDate", score.getFinishDate());
+        return dto;
+    }
+    //Task 5 - end
 
     private Player getAuthentication(Authentication authentication) {
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
@@ -110,9 +127,34 @@ public class RestControllerGame {
         return dto;
     }
 
+    @RequestMapping(path = "/games", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, Object>> createJuego(Authentication authentication) {
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        Player authenticatedPlayer = getAuthentication(authentication);
+        if(authenticatedPlayer == null){
+            return new ResponseEntity<>(makeMap("error","No name given"), HttpStatus.FORBIDDEN);
+        } else {
+            Date date = Date.from(java.time.ZonedDateTime.now().toInstant());
+            Game auxGame = new Game(date);
+            repositoryGame.save(auxGame);
+
+            GamePlayer auxGameP = new GamePlayer(authenticatedPlayer,auxGame);
+            repositoryGamePlayer.save(auxGameP);
+            //return new ResponseEntity<>("Game Created", HttpStatus.CREATED);
+            return new ResponseEntity<>(makeMap("gpid", auxGameP.getId()), HttpStatus.CREATED);
+        }
+    }
+
+    private Map<String, Object> makeMap(String key, Object value) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(key, value);
+        return map;
+    }
+
     @RequestMapping("/game_view/{Id}")
-    public Map<String, Object> dameJuegoConBarcos(@PathVariable Long Id) {
-        return armarUnSoloGameToDTO(repositoryGamePlayer.findById(Id).get());
+    public Map<String, Object> dameJuegoConBarcos(@PathVariable Long Id,Authentication authentication) {
+
+            return armarUnSoloGameToDTO(repositoryGamePlayer.findById(Id).get());
 
     }
 
@@ -149,7 +191,7 @@ public class RestControllerGame {
 
     private Map<String, Object> armarGamePlayersToDTO(GamePlayer gamePlayer){
         Map<String, Object> dto2 = new LinkedHashMap<String, Object>();
-        dto2.put("id", gamePlayer.getId());
+        dto2.put("gpid", gamePlayer.getId());
         dto2.put("FechaGamePlayer", gamePlayer.getJoinDate());
         dto2.put("player", armarPlayerToDTO(gamePlayer.getPartidaPlayer())); //.forEach(gamePlayer -> myList.addAll(armarSalvoList(gamePlayer.getGamePlayerIdOfSalvo())))
 
