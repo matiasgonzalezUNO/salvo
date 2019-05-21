@@ -9,7 +9,11 @@ var salvoJSON;
 var salvoPositions = [];
 var waitState = false;
 
+//postShipLocations("/games/players/{gamePlayerId}/ships");
+postShipLocations(makePostUrl());
+postSalvo(makePostUrlSalvoes());
 refreshGameView(makeUrl());
+
 
 $('#logoutButton').on('click', function (event) {
     event.preventDefault();
@@ -168,7 +172,7 @@ function showSelf (gamePlayerData) {
     youID = "";
 
     gamePlayerData.gamePlayers.forEach(function(gamePlayer) {
-        if (gamePlayer.id == getParameterByName("gp")) {
+        if (gamePlayer.gpid == getParameterByName("gp")) {
             you = gamePlayer.player.email;
             youID = gamePlayer.player.id;
         } else {
@@ -291,7 +295,8 @@ function createTable(player) {
 function postShipLocations (postUrl) {
     $.post({
         url: postUrl,
-        data: shipsJSON,
+        //data: shipsJSON,
+        data: JSON.stringify([{type: "destroyer", locations: ["A1", "A2", "A3"]},{type: "Submarine", locations: ["B1", "B2", "B3"]}]),
         dataType: "text",
         contentType: "application/json"
     })
@@ -318,7 +323,8 @@ function postShipLocations (postUrl) {
 function postSalvo (postUrl) {
     $.post({
         url: postUrl,
-        data: salvoJSON,
+        //data: salvoJSON,
+        data: JSON.stringify({turn: 3, locations: ["A1", "A2", "H1"]}),
         dataType: "text",
         contentType: "application/json"
     })

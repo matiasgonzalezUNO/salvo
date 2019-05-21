@@ -18,24 +18,21 @@ public class Ship {
 
     @ElementCollection
     @Column(name="shipLocation")
-    private List<String> shipLocations = new ArrayList<>();
+    private List<String> locations = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="gamePlayerIdOfship")
     private GamePlayer gamePlayerOfship;
 
-    private String tipoBarco;
+    private String type;
 
     public Ship() {
     }
 
-
-
-    public Ship( GamePlayer gamePlayerId, String tipoB, List<String> shipLocation) {
-
-        this.gamePlayerOfship = gamePlayerId;
-        this.shipLocations = shipLocation;
-        this.tipoBarco = tipoB;
+    public Ship( GamePlayer gamePlayerOfship, String type,List<String> locations) {
+        this.locations = locations;
+        this.gamePlayerOfship = gamePlayerOfship;
+        this.type = type;
     }
 
     public long getId() {
@@ -46,21 +43,27 @@ public class Ship {
         this.id = id;
     }
 
-
-
-    public List<String> getShipLocation() {
-        return shipLocations;
+    public List<String> getLocations() {
+        return locations;
     }
 
-    public void setShipLocation(List<String> shipLocation) {
-        this.shipLocations = shipLocation;
+    public void setLocations(List<String> locations) {
+        this.locations = locations;
     }
 
-    public String getTipoBarco() {
-        return tipoBarco;
+    public String getType() {
+        return type;
     }
 
-    public void setTipoBarco(String tipoBarco) {
-        this.tipoBarco = tipoBarco;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public GamePlayer getGamePlayerOfship() {
+        return gamePlayerOfship;
+    }
+
+    public void setGamePlayerOfship(GamePlayer gamePlayerOfship) {
+        this.gamePlayerOfship = gamePlayerOfship;
     }
 }

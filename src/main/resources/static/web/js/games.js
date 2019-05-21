@@ -205,7 +205,7 @@ function showGamesTable(gamesData) {
 
                 }
                 if (gamesData[i].gamePlayers[j].player.id == data.player.id) {
-                    gpid = gamesData[i].gamePlayers[j].id;
+                    gpid = gamesData[i].gamePlayers[j].gpid;
                     isLoggedPlayer = true;
                 }
             }
