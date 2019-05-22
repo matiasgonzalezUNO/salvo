@@ -326,26 +326,16 @@ public class RestControllerGame {
         }
 
         if(gamePlayerConSalvos(gamePlayer, Salvoes)){
-            return new ResponseEntity<>(makeMap("error","Juego ya tiene Salvos"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(makeMap("error","Juego ya tiene Salvos para este turno"), HttpStatus.UNAUTHORIZED);
         } else {
-            if(gamePlayer.getGamePlayerOfship().isEmpty()){
-               /* Salvoes.forEach(salvo -> salvo.setGamePlayerIdOfSalvo(gamePlayer));
-                gamePlayer.setGamePlayerIdOfSalvo(Salvoes.stream().collect(toSet()));
-                salvoRepository.saveAll(Salvoes);*/
                 Salvoes.setGamePlayerIdOfSalvo(gamePlayer);
                 salvoRepository.save(Salvoes);
                 return new ResponseEntity<>(makeMap("Ok","salvos guardados"), HttpStatus.CREATED);
-            }else{
-                return new ResponseEntity<>(makeMap("error","El jugador ya colocó los salvos en el turno"), HttpStatus.UNAUTHORIZED);
-            }
-
         }
-
     }
 
     //gamePlayerConSalvos
     private boolean gamePlayerConSalvos(GamePlayer gamePlayerAux, Salvo salvoes ){
-
         boolean tieneSalvo = false;
         int turno = salvoes.getTurn();
         for (Salvo s:gamePlayerAux.getGamePlayerIdOfSalvo()){
@@ -353,7 +343,6 @@ public class RestControllerGame {
                 tieneSalvo = true;
             }
         }
-
         return tieneSalvo;
     }
 
