@@ -43,117 +43,22 @@ public class SalvoApplication {
 
 			// save a couple of customers
 
-			/*
-			Player p1 = new Player("Lucas", "carri", "Lcarri@gmail");
-			repositoryPlayer.save(p1);
-			Player p2 = new Player("jet", "black", "JBlack@gmail");
-			repositoryPlayer.save(p2);
-
-			Date date = new Date();
-			Game g1 = new Game(date);
-			repositoryGame.save(g1);
-
-			GamePlayer gp1 = new GamePlayer(p1,g1);
-			GamePlayer gp2 = new GamePlayer(p2,g1);
-			repositoryGamePlayer.save(gp1);
-			repositoryGamePlayer.save(gp2);
-
-			List<String> l_1 = new ArrayList<String>();
-			l_1.add("H4");
-			l_1.add("H2");
-			l_1.add("H3");
-            l_1.add("H1");
-			Ship s1 = new Ship(gp1, "Destroyer", l_1);
-			shipRepository.save(s1);
-
-			List<String> l_2 = new ArrayList<String>();
-			l_2.add("A1");
-			l_2.add("A2");
-			l_2.add("A3");
-			Ship s2 = new Ship(gp1, "Destroyer", l_2);
-			shipRepository.save(s2);
-
-			List<String> l_3 = new ArrayList<String>();
-			l_3.add("B8");
-			l_3.add("C8");
-			l_3.add("D8");
-			l_3.add("E8");
-			l_3.add("F8");
-			Ship s3 = new Ship(gp1, "Destroyer", l_3);
-			shipRepository.save(s3);
-
-			List<String> l_4 = new ArrayList<String>();
-			l_4.add("I10");
-			l_4.add("J10");
-			Ship s4 = new Ship(gp2, "boatPatrol", l_4);
-			shipRepository.save(s4);
-
-			List<String> l_5 = new ArrayList<String>();
-			l_5.add("I3");
-			l_5.add("I4");
-			l_5.add("I5");
-			l_5.add("I6");
-			l_5.add("I7");
-			Ship s5 = new Ship(gp2, "carrier", l_5);
-			shipRepository.save(s5);
-
-			List<String> listSalvo_1 = new ArrayList<String>();
-			listSalvo_1.add("A5");
-			listSalvo_1.add("B5");
-			Salvo salvo1 = new Salvo(1,gp1, listSalvo_1);
-			salvoRepository.save(salvo1);
-
-			List<String> listSalvo_2 = new ArrayList<String>();
-			listSalvo_2.add("J5");
-			listSalvo_2.add("J6");
-			Salvo salvo2 = new Salvo(1, gp2, listSalvo_2);
-			salvoRepository.save(salvo2);
-
-			List<String> listSalvo_3 = new ArrayList<String>();
-			listSalvo_3.add("I5");
-			listSalvo_3.add("J5");
-			Salvo salvo3 = new Salvo(2, gp1, listSalvo_3);
-			salvoRepository.save(salvo3);
-
-			Score Score1 = new Score(p1, g1, (float)1, date);
-			scoreRepository.save(Score1);
-
-			Score Score2 = new Score(p2, g1, (float)0, date);
-			scoreRepository.save(Score2);
-
-			// *-*-*-*-*-*-*-*-*-*-*JUEGO 2 -*-*-*-*-*-*-*-*-*-*-*-*
-
-			Game g2 = new Game(date);
-			repositoryGame.save(g2);
-
-			Player p3 = new Player("Spike", "Spieguel", "SpikeS@gmail");
-			repositoryPlayer.save(p3);
-
-			GamePlayer gp3 = new GamePlayer(p2,g2);
-			GamePlayer gp4 = new GamePlayer(p3,g2);
-			repositoryGamePlayer.save(gp3);
-			repositoryGamePlayer.save(gp4);
-
-			Score Score3 = new Score(p2, g2, (float)0.5, date);
-			scoreRepository.save(Score3);
-
-			Score Score4 = new Score(p3, g2, (float)0.5, date);
-			scoreRepository.save(Score4);
-
-			 */
-
 
 			// *-*-*-*-*-*-*-*-*-*-*Program INTRODUCCIÓN JAVA 1 -*-*-*-*-*-*-*-*-*-*-*-*
-			Player p1 = new Player("Jack", "Bauer", "j.bauer@ctu.gov",passwordEncoder.encode("24"));
+			Player p1 = new Player("Jack", "Bauer",
+					"j.bauer@ctu.gov",passwordEncoder.encode("24"));
 			repositoryPlayer.save(p1);
 
-			Player p2 = new Player("Chloe", " O'Brian", "c.obrian@ctu.gov",passwordEncoder.encode("42"));
+			Player p2 = new Player("Chloe", " O'Brian",
+					"c.obrian@ctu.gov",passwordEncoder.encode("42"));
 			repositoryPlayer.save(p2);
 
-			Player p3 = new Player("Kim", "Bauer", "kim_bauer@gmail.com",passwordEncoder.encode("kb"));
+			Player p3 = new Player("Kim", "Bauer",
+					"kim_bauer@gmail.com",passwordEncoder.encode("kb"));
 			repositoryPlayer.save(p3);
 
-			Player p4 = new Player("Tony", "Almeida", "t.almeida@ctu.gov",passwordEncoder.encode("mole"));
+			Player p4 = new Player("Tony", "Almeida",
+					"t.almeida@ctu.gov",passwordEncoder.encode("mole"));
 			repositoryPlayer.save(p4);
 
 			Date newDate1 = new Date();
@@ -241,7 +146,7 @@ public class SalvoApplication {
 			List<String> ShipL_3 = new ArrayList<String>();
 			ShipL_3.add("B4");
 			ShipL_3.add("B5");
-			Ship s3 = new Ship(gp1, "Patrol Boat", ShipL_3);
+			Ship s3 = new Ship(gp1, "PatrolBoat", ShipL_3);
 			shipRepository.save(s3);
 			List<String> ShipL_4 = new ArrayList<String>();
 			ShipL_4.add("B5");
@@ -252,7 +157,7 @@ public class SalvoApplication {
 			List<String> ShipL_5 = new ArrayList<String>();
 			ShipL_5.add("F1");
 			ShipL_5.add("F2");
-			Ship s5 = new Ship(gp2, "Patrol Boat", ShipL_5);
+			Ship s5 = new Ship(gp2, "PatrolBoat", ShipL_5);
 			shipRepository.save(s5);
 
 			List<String> ShipL_6 = new ArrayList<String>();
@@ -264,7 +169,7 @@ public class SalvoApplication {
 			List<String> ShipL_7 = new ArrayList<String>();
 			ShipL_7.add("C6");
 			ShipL_7.add("C7");
-			Ship s7 = new Ship(gp3, "Patrol Boat", ShipL_7);
+			Ship s7 = new Ship(gp3, "PatrolBoat", ShipL_7);
 			shipRepository.save(s7);
 			List<String> ShipL_8 = new ArrayList<String>();
 			ShipL_8.add("A2");
@@ -275,7 +180,7 @@ public class SalvoApplication {
 			List<String> ShipL_9 = new ArrayList<String>();
 			ShipL_9.add("G6");
 			ShipL_9.add("H6");
-			Ship s9 = new Ship(gp4, "Patrol Boat", ShipL_9);
+			Ship s9 = new Ship(gp4, "PatrolBoat", ShipL_9);
 			shipRepository.save(s9);
 
 			//p1= j.bauer@ctu.gov
@@ -298,8 +203,8 @@ public class SalvoApplication {
 			Salvo salvo1 = new Salvo(1, gp1, listSalvo_1);
 			salvoRepository.save(salvo1);
 			List<String> listSalvo_2 = new ArrayList<String>();
-			listSalvo_2.add("B4");
-			listSalvo_2.add("B5");
+			listSalvo_2.add("H2");
+			listSalvo_2.add("H3");
 			listSalvo_2.add("B6");
 			Salvo salvo2 = new Salvo(1, gp2, listSalvo_2);
 			salvoRepository.save(salvo2);
@@ -311,7 +216,7 @@ public class SalvoApplication {
 			List<String> listSalvo_4 = new ArrayList<String>();
 			listSalvo_4.add("E1");
 			listSalvo_4.add("H3");
-			listSalvo_4.add("A2");
+
 			Salvo salvo4 = new Salvo(2, gp2, listSalvo_4);
 			salvoRepository.save(salvo4);
 
@@ -322,7 +227,8 @@ public class SalvoApplication {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
 
@@ -373,17 +279,22 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.logout().logoutUrl("/api/logout")
 				.permitAll();
 
+		//Linea para acceder a la BD h2 y no lo bloquee --> pass en application.properties
+		http.headers().frameOptions().sameOrigin();
+
 		// turn off checking for CSRF tokens
 		http.csrf().disable();
 
 		// if user is not authenticated, just send an authentication failure response
-		http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+		http.exceptionHandling().authenticationEntryPoint(
+				(req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
 
 		// if login is successful, just clear the flags asking for authentication
 		http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
 
 		// if login fails, just send an authentication failure response
-		http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
+		http.formLogin().failureHandler(
+				(req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
 
 		// if logout is successful, just send a success response
 		http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
@@ -399,21 +310,3 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 
 
-/*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().fullyAuthenticated().
-                and().httpBasic();
-    }*/
-
-    /*@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/**").hasAuthority("USER")
-				.and()
-				.formLogin()
-				.usernameParameter("name")
-				.passwordParameter("pwd")
-				.loginPage("/app/login");
-
-		http.logout().logoutUrl("/app/logout");
-	}*/

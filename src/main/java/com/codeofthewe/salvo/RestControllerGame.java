@@ -32,6 +32,16 @@ public class RestControllerGame {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    private ArrayList<String> hitLocations = new ArrayList<String>();
+
+    int carrierDamage = 0;
+    int battleshipDamage = 0;
+    int submarineDamage = 0;
+    int destroyerDamage = 0;
+    int patrolboatDamage = 0;
+
+
+
     @RequestMapping(path = "/players", method = RequestMethod.POST)
     public ResponseEntity<String> loguear(@RequestParam String username, @RequestParam String password) {
         if (username.isEmpty()) {
@@ -191,12 +201,150 @@ public class RestControllerGame {
         dto.put("created", gameplayer.getPartidaJuego().getCreationDate().getTime());
         dto.put("gamePlayers", gameplayer.getPartidaJuego().getGamePlayers()
                 .stream()
-                .map(gamePlayer2 -> armarGamePlayersToDTO(gamePlayer2))
+                .map(gamePlayer2 -> armarGamePlayersToDTOParaGame_view(gamePlayer2))
                 .collect(toList()));
         dto.put("ships", gameplayer.getGamePlayerOfship().stream().map(ship -> armarDtoShip(ship)).collect(toList()));
         dto.put("salvoes", getSalvoList(gameplayer.getPartidaJuego()));
+        if(gameplayer.getPartidaJuego().getGamePlayers().size() > 1) {
+            dto.put("hits", ParaArmarHits(gameplayer.getPartidaJuego(), gameplayer));
+        }
         return dto;
     }
+
+    //TASK 5 - Programa 5
+    private Map<String, Object> ParaArmarHits(Game game, GamePlayer gameplayer){
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        GamePlayer gamePlayerOponente = buscarGamePlayerOponente(game, gameplayer);
+        dto.put("self", getHits(gameplayer, gamePlayerOponente));
+        carrierDamage = 0;
+        battleshipDamage = 0;
+        submarineDamage = 0;
+        destroyerDamage = 0;
+        patrolboatDamage = 0;
+        dto.put("opponent", getHits(gamePlayerOponente,gameplayer));
+
+        return dto;
+    }
+
+    private GamePlayer buscarGamePlayerOponente(Game game, GamePlayer gameplayer){
+        GamePlayer gamePlayerAux = null;
+        Set<GamePlayer> gamePlayers= game.getGamePlayers();
+        for (GamePlayer gp:gamePlayers){
+            if(gp.getId() != gameplayer.getId() ){
+                gamePlayerAux = gp;
+            }
+        }
+        return gamePlayerAux;
+    }
+
+    private List<Object> getHits(GamePlayer gamePlayerHit, GamePlayer gamePlayerOponenteHit){
+        //gamePlayer.getGamePlayerOfship().stream().map(ship -> armarDtoShip(ship)).collect(toList()));
+
+        return gamePlayerHit.getGamePlayerIdOfSalvo().stream().map(salvoTurn -> armarDtoSalvoPorTurno(salvoTurn,gamePlayerOponenteHit)).collect(toList());
+    }
+
+    private Map<String,Object> armarDtoSalvoPorTurno(Salvo salvo, GamePlayer gamePlayerOponente){
+        Map<String,Object> dto = new LinkedHashMap<String, Object>();
+
+        //hitLocations.clear();
+        dto.put("turn", salvo.getTurn());
+
+        dto.put("damages", dameDaños(salvo, gamePlayerOponente));
+        //dto.put("hitLocations", hitLocations);
+        dto.put("hitLocations", heAcertado(salvo, gamePlayerOponente));
+        //dto.put("hitLocations", salvo.getLocations());
+        dto.put("missed", perdidos(salvo,heAcertado(salvo, gamePlayerOponente)));
+
+        return dto;
+    }
+
+    private int perdidos(Salvo salvo, List<String> heAcertado){
+        int missed = 0;
+        missed = salvo.getLocations().size() - heAcertado.size();
+        return missed;
+    }
+
+    private List<String> heAcertado(Salvo salvo, GamePlayer gamePlayerOponente){
+        ArrayList<String> heAcertado = new ArrayList<String>();
+        ArrayList<String> boatLocations = new ArrayList<String>();
+        for (Ship shipAux : gamePlayerOponente.getGamePlayerOfship()) {
+            boatLocations = new ArrayList<String>(shipAux.getLocations());
+            ArrayList<String> salvoLocations = new ArrayList<String>();
+            salvoLocations = new ArrayList<String>(salvo.getLocations());
+
+            for(int x = 0; x < salvoLocations.size(); x++) {
+                for (int y = 0; y < boatLocations.size(); y++) {
+                    if (salvoLocations.get(x) == boatLocations.get(y)) {
+                        heAcertado.add(salvoLocations.get(x));
+                    }
+                }
+            }
+        }
+
+        return heAcertado;
+    }
+    /*private List<Object> heAcertado(Salvo salvo, GamePlayer gamePlayerOponente){
+        return salvo.getLocations().stream().map(salvoAux -> compararSalvoShip(salvoAux,gamePlayerOponente)).collect(toList());
+    }
+
+    private String compararSalvoShip(String salvoAux, GamePlayer gamePlayerOponente){
+        gamePlayerOponente.getGamePlayerOfship().forEach(ship -> ship.getLocations().forEach(possi -> possi = salvoAux));
+    }*/
+
+    private Map<String,Object> dameDaños(Salvo salvo, GamePlayer gamePlayerOponente){
+        int carrierHits = cantDeHitsAlBarco(salvo,gamePlayerOponente,"Carrier");
+        int battleshipHits = cantDeHitsAlBarco(salvo,gamePlayerOponente,"Battleship");
+        int submarineHits = cantDeHitsAlBarco(salvo,gamePlayerOponente,"Submarine");
+        int destroyerHits = cantDeHitsAlBarco(salvo,gamePlayerOponente,"Destroyer");
+        int patrolboatHits = cantDeHitsAlBarco(salvo,gamePlayerOponente,"PatrolBoat");
+        Map<String,Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("carrierHits", carrierHits);
+        dto.put("battleshipHits", battleshipHits);
+        dto.put("submarineHits", submarineHits);
+        dto.put("destroyerHits", destroyerHits);
+        dto.put("patrolboatHits", patrolboatHits);
+
+        carrierDamage = carrierDamage + carrierHits;
+        battleshipDamage = battleshipDamage + battleshipHits;
+        submarineDamage = submarineDamage + submarineHits;
+        destroyerDamage = destroyerDamage + destroyerHits;
+        patrolboatDamage = patrolboatDamage + patrolboatHits;
+
+        dto.put("carrier", carrierDamage);
+        dto.put("battleship", battleshipDamage);
+        dto.put("submarine", submarineDamage);
+        dto.put("destroyer", destroyerDamage);
+        dto.put("patrolboat", patrolboatDamage);
+
+        return dto;
+    }
+
+    private int cantDeHitsAlBarco(Salvo salvo, GamePlayer gamePlayerOponente,String tipoBarco){
+        int cantDeHitsAlBarco = 0;
+        ArrayList<String> boatHitsLocations = new ArrayList<String>();
+
+            for (Ship s : gamePlayerOponente.getGamePlayerOfship()) {
+                if (s.getType() == tipoBarco) {
+                    boatHitsLocations = new ArrayList<String>(s.getLocations());
+                }
+            }
+
+            ArrayList<String> salvoLocations = new ArrayList<String>();
+            salvoLocations = new ArrayList<String>(salvo.getLocations());
+
+            for(int x = 0; x < salvoLocations.size(); x++) {
+                for (int y = 0; y < boatHitsLocations.size(); y++) {
+                    if (salvoLocations.get(x) == boatHitsLocations.get(y)) {
+                        //hitLocations.add(salvoLocations.get(x));
+                        cantDeHitsAlBarco = cantDeHitsAlBarco + 1;
+                    }
+                }
+            }
+
+        return cantDeHitsAlBarco;
+    }
+
+    //END - TASK 5 - Programa 5
 
     private List<Map<String,Object>> getSalvoList(Game game){
         List<Map<String,Object>> myList = new ArrayList<>();
@@ -217,9 +365,17 @@ public class RestControllerGame {
     private Map<String, Object> armarGamePlayersToDTO(GamePlayer gamePlayer){
         Map<String, Object> dto2 = new LinkedHashMap<String, Object>();
         dto2.put("gpid", gamePlayer.getId());
-        dto2.put("FechaGamePlayer", gamePlayer.getJoinDate());
+        dto2.put("joinDate", gamePlayer.getJoinDate());
         dto2.put("player", armarPlayerToDTO(gamePlayer.getPartidaPlayer())); //.forEach(gamePlayer -> myList.addAll(armarSalvoList(gamePlayer.getGamePlayerIdOfSalvo())))
         dto2.put("ships", gamePlayer.getGamePlayerOfship().stream().map(ship -> armarDtoShip(ship)).collect(toList()));
+
+        return dto2;
+    }
+    private Map<String, Object> armarGamePlayersToDTOParaGame_view(GamePlayer gamePlayer){
+        Map<String, Object> dto2 = new LinkedHashMap<String, Object>();
+        dto2.put("gpid", gamePlayer.getId());
+        dto2.put("joinDate", gamePlayer.getJoinDate());
+        dto2.put("player", armarPlayerToDTO(gamePlayer.getPartidaPlayer())); //.forEach(gamePlayer -> myList.addAll(armarSalvoList(gamePlayer.getGamePlayerIdOfSalvo())))
 
         return dto2;
     }
@@ -244,7 +400,7 @@ public class RestControllerGame {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("id", player.getId());
         dto.put("email", player.getEmail());
-        dto.put("score", armarScoreToDTO(player));
+        //dto.put("score", armarScoreToDTO(player));
         return dto;
     }
 
@@ -350,48 +506,3 @@ public class RestControllerGame {
 }
 
 
-
-/* @RequestMapping("/game")
-    public List<Long> getAll() {
-        return repositoryGame.findAll().stream().map(sub -> sub.getId()).collect(toList());
-    }
-
-    @RequestMapping("/games")
-    public List<Date> getAll2() {
-        return repositoryGame.findAll().stream().map(sub -> sub.getCreationDate()).collect(toList());
-    }
-
-   @RequestMapping("/game3")
-    public Map<String, ArrayList<Game>> getAll3(){
-        Map<String, ArrayList<Game>> juegos = new HashMap<String, ArrayList<Game>>();
-       ArrayList<Game> juegoRepo = new ArrayList<Game>();
-       juegoRepo = new ArrayList<Game>(repositoryGame.findAll());
-       juegos.put("1",juegoRepo);
-        //juegos.put(1, repositoryGame.getOne((long) 1).getCreationDate());
-        //juegos.put(repositoryGame.findAll().stream().map(sub -> sub.getId()).collect(toList()), );
-
-
-        return juegos;
-    }
-*/
-
-/*
-    //viejo codigo /games
-    @RequestMapping("/games")
-    public List<Object> dameTodosLosjuegos() {
-        return repositoryGame.findAll().stream().map(game -> armarGamesToDTO(game)).collect(toList());
-
-    }
-
-    private Map<String, Object> armarGamesToDTO(Game game){
-        Map<String, Object> dto = new LinkedHashMap<String, Object>();
-        dto.put("id", game.getId());
-        dto.put("crationDate", game.getCreationDate().getTime());
-        dto.put("gamePlayers", game.getGamePlayers()
-                .stream()
-                .map(gamePlayer -> armarGamePlayersToDTO(gamePlayer))
-                .collect(toList()));
-        return dto;
-    }
-
-     */
