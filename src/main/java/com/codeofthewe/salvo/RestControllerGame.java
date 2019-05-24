@@ -203,7 +203,7 @@ public class RestControllerGame {
                 .stream()
                 .map(gamePlayer2 -> armarGamePlayersToDTOParaGame_view(gamePlayer2))
                 .collect(toList()));
-        dto.put("ships", gameplayer.getGamePlayerOfship().stream().map(ship -> armarDtoShip(ship)).collect(toList()));
+        dto.put("ships", gameplayer.getGamePlayerOfship().stream().sorted(Comparator.comparing(Ship::getType)).map(ship -> armarDtoShip(ship)).collect(toList()));
         dto.put("salvoes", getSalvoList(gameplayer.getPartidaJuego()));
         if(gameplayer.getPartidaJuego().getGamePlayers().size() > 1) {
             dto.put("hits", ParaArmarHits(gameplayer.getPartidaJuego(), gameplayer));
@@ -215,6 +215,11 @@ public class RestControllerGame {
     private Map<String, Object> ParaArmarHits(Game game, GamePlayer gameplayer){
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         GamePlayer gamePlayerOponente = buscarGamePlayerOponente(game, gameplayer);
+        carrierDamage = 0;
+        battleshipDamage = 0;
+        submarineDamage = 0;
+        destroyerDamage = 0;
+        patrolboatDamage = 0;
         dto.put("self", getHits(gameplayer, gamePlayerOponente));
         carrierDamage = 0;
         battleshipDamage = 0;
@@ -240,7 +245,9 @@ public class RestControllerGame {
     private List<Object> getHits(GamePlayer gamePlayerHit, GamePlayer gamePlayerOponenteHit){
         //gamePlayer.getGamePlayerOfship().stream().map(ship -> armarDtoShip(ship)).collect(toList()));
 
-        return gamePlayerHit.getGamePlayerIdOfSalvo().stream().map(salvoTurn -> armarDtoSalvoPorTurno(salvoTurn,gamePlayerOponenteHit)).collect(toList());
+        return gamePlayerHit.getGamePlayerIdOfSalvo().stream()
+                .sorted(Comparator.comparingInt(Salvo::getTurn))
+                        .map(salvoTurn -> armarDtoSalvoPorTurno(salvoTurn,gamePlayerOponenteHit)).collect(toList());
     }
 
     private Map<String,Object> armarDtoSalvoPorTurno(Salvo salvo, GamePlayer gamePlayerOponente){

@@ -159,6 +159,14 @@ public class SalvoApplication {
 			ShipL_5.add("F2");
 			Ship s5 = new Ship(gp2, "PatrolBoat", ShipL_5);
 			shipRepository.save(s5);
+			List<String> ShipL_10 = new ArrayList<String>();
+			ShipL_10.add("A2");
+			ShipL_10.add("B2");
+			ShipL_10.add("C2");
+			ShipL_10.add("D2");
+			ShipL_10.add("E2");
+			Ship s10 = new Ship(gp2, "Carrier", ShipL_10);
+			shipRepository.save(s10);
 
 			List<String> ShipL_6 = new ArrayList<String>();
 			ShipL_6.add("B5");

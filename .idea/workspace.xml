@@ -64,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/SalvoApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-221">
-              <caret line="218" selection-start-line="218" selection-end-line="218" />
+            <state relative-caret-position="270">
+              <caret line="167" column="56" selection-start-line="167" selection-start-column="56" selection-end-line="167" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -73,133 +73,30 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/RestControllerGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="685">
-              <caret line="216" column="12" selection-start-line="216" selection-start-column="8" selection-end-line="216" selection-end-column="12" />
+            <state relative-caret-position="291">
+              <caret line="248" column="55" selection-start-line="248" selection-start-column="55" selection-end-line="248" selection-end-column="55" />
               <folding>
-                <element signature="e#1187#1831#0" />
-                <element signature="e#3292#3523#0" />
-                <element signature="e#3528#3836#0" />
-                <element signature="e#3861#4157#0" />
-                <element signature="e#4163#4402#0" />
-                <element signature="e#4408#4778#0" />
-                <element signature="e#4784#5234#0" />
-                <element signature="e#6190#6359#0" />
-                <element signature="e#7576#7775#0" />
-                <element signature="e#10491#10499#0" expanded="true" />
-                <element signature="e#12513#12684#0" />
-                <element signature="e#14338#14575#0" />
-                <element signature="e#14881#15328#0" />
+                <element signature="e#13791#13799#0" expanded="true" />
+                <element signature="e#14096#14104#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/Ship.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/js/game.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="54" selection-start-line="54" selection-end-line="54" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1006#1007#0" expanded="true" />
-                <element signature="e#1038#1039#0" expanded="true" />
-                <element signature="e#1094#1095#0" expanded="true" />
-                <element signature="e#1136#1137#0" expanded="true" />
-                <element signature="e#1194#1195#0" expanded="true" />
-                <element signature="e#1234#1235#0" expanded="true" />
-                <element signature="e#1266#1267#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="133">
+              <caret line="326" column="71" selection-start-line="326" selection-start-column="30" selection-end-line="326" selection-end-column="71" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.3.9.Final/e0922b9cc0621641bdec33b4e2869d033f918a4c/hibernate-core-5.3.9.Final-sources.jar!/org/hibernate/collection/internal/PersistentBag.java">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/game.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4556">
-              <caret line="309" selection-start-line="309" selection-end-line="309" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.3.9.Final/e0922b9cc0621641bdec33b4e2869d033f918a4c/hibernate-core-5.3.9.Final-sources.jar!/org/hibernate/collection/internal/PersistentSet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2652">
-              <caret line="188" selection-start-line="188" selection-end-line="188" />
-              <folding>
-                <element signature="e#5162#5163#0" expanded="true" />
-                <element signature="e#5217#5218#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/Salvo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1457#1458#0" expanded="true" />
-                <element signature="e#1513#1514#0" expanded="true" />
-                <element signature="e#1555#1556#0" expanded="true" />
-                <element signature="e#1583#1584#0" expanded="true" />
-                <element signature="e#1610#1611#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.3.9.Final/e0922b9cc0621641bdec33b4e2869d033f918a4c/hibernate-core-5.3.9.Final-sources.jar!/org/hibernate/collection/internal/AbstractPersistentCollection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1479">
-              <caret line="148" selection-start-line="148" selection-end-line="148" />
-              <folding>
-                <element signature="e#4316#4317#0" expanded="true" />
-                <element signature="e#25193#25194#0" expanded="true" />
-                <element signature="e#25216#25217#0" expanded="true" />
-                <element signature="e#25258#25259#0" expanded="true" />
-                <element signature="e#25287#25288#0" expanded="true" />
-                <element signature="e#25325#25326#0" expanded="true" />
-                <element signature="e#25351#25352#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="57" selection-start-line="57" selection-end-line="57" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1187#1188#0" expanded="true" />
-                <element signature="e#1626#1627#0" expanded="true" />
-                <element signature="e#1655#1656#0" expanded="true" />
-                <element signature="e#1703#1704#0" expanded="true" />
-                <element signature="e#1739#1740#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/GamePlayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#971#972#0" expanded="true" />
-                <element signature="e#1006#1007#0" expanded="true" />
-                <element signature="e#1569#1570#0" expanded="true" />
-                <element signature="e#1965#1966#0" expanded="true" />
-                <element signature="e#2007#2008#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-6723">
+              <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -232,7 +129,6 @@
       <find>created</find>
       <find>join</find>
       <find>/games</find>
-      <find>makePostUrl</find>
       <find>uni</find>
       <find>salvoes</find>
       <find>addDamagesIcons</find>
@@ -244,6 +140,8 @@
       <find>hitLocations</find>
       <find>dameDaños</find>
       <find>List&lt;Object&gt;</find>
+      <find>postShipLocations</find>
+      <find>makePostUrl</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -335,9 +233,7 @@
               <item name="salvo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="salvo" type="462c0819:PsiDirectoryNode" />
-              <item name="SalvoApplication.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="salvo" type="b2602c69:ProjectViewProjectNode" />
@@ -345,6 +241,26 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="salvo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="salvo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="salvo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="salvo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -527,7 +443,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14513677" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.14741641" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -551,7 +467,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Maven" order="4" />
-      <window_info anchor="right" id="Gradle" order="5" weight="0.14589666" />
+      <window_info anchor="right" id="Gradle" order="5" visible="true" weight="0.14589666" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
@@ -709,24 +625,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/game.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
-          <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/games.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="61" selection-start-line="26" selection-start-column="61" selection-end-line="26" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/js/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2362">
-          <caret line="59" column="24" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -768,36 +670,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.3.9.Final/e0922b9cc0621641bdec33b4e2869d033f918a4c/hibernate-core-5.3.9.Final-sources.jar!/org/hibernate/collection/internal/PersistentSet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/GamePlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2652">
-          <caret line="188" selection-start-line="188" selection-end-line="188" />
+        <state relative-caret-position="816">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
           <folding>
-            <element signature="e#5162#5163#0" expanded="true" />
-            <element signature="e#5217#5218#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.3.9.Final/e0922b9cc0621641bdec33b4e2869d033f918a4c/hibernate-core-5.3.9.Final-sources.jar!/org/hibernate/collection/internal/AbstractPersistentCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="148" selection-start-line="148" selection-end-line="148" />
-          <folding>
-            <element signature="e#4316#4317#0" expanded="true" />
-            <element signature="e#25193#25194#0" expanded="true" />
-            <element signature="e#25216#25217#0" expanded="true" />
-            <element signature="e#25258#25259#0" expanded="true" />
-            <element signature="e#25287#25288#0" expanded="true" />
-            <element signature="e#25325#25326#0" expanded="true" />
-            <element signature="e#25351#25352#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#971#972#0" expanded="true" />
+            <element signature="e#1006#1007#0" expanded="true" />
+            <element signature="e#1569#1570#0" expanded="true" />
+            <element signature="e#1965#1966#0" expanded="true" />
+            <element signature="e#2007#2008#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
+        <state relative-caret-position="901">
           <caret line="57" selection-start-line="57" selection-end-line="57" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -810,17 +700,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/GamePlayer.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.3.9.Final/e0922b9cc0621641bdec33b4e2869d033f918a4c/hibernate-core-5.3.9.Final-sources.jar!/org/hibernate/collection/internal/PersistentSet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="349">
+          <caret line="188" selection-start-line="188" selection-end-line="188" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#971#972#0" expanded="true" />
-            <element signature="e#1006#1007#0" expanded="true" />
-            <element signature="e#1569#1570#0" expanded="true" />
-            <element signature="e#1965#1966#0" expanded="true" />
-            <element signature="e#2007#2008#0" expanded="true" />
+            <element signature="e#5162#5163#0" expanded="true" />
+            <element signature="e#5217#5218#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -840,31 +726,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/js/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="326" column="71" selection-start-line="326" selection-start-column="30" selection-end-line="326" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.3.9.Final/e0922b9cc0621641bdec33b4e2869d033f918a4c/hibernate-core-5.3.9.Final-sources.jar!/org/hibernate/collection/internal/AbstractPersistentCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="873" selection-start-line="873" selection-end-line="873" />
+          <folding>
+            <element signature="e#4316#4317#0" expanded="true" />
+            <element signature="e#4342#4343#0" expanded="true" />
+            <element signature="e#25193#25194#0" expanded="true" />
+            <element signature="e#25216#25217#0" expanded="true" />
+            <element signature="e#25287#25288#0" expanded="true" />
+            <element signature="e#25325#25326#0" expanded="true" />
+            <element signature="e#25351#25352#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/js/shipPlacement.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-692" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/js/interactsalvo.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/web/game.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6723">
+          <caret line="58" column="26" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/SalvoApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="218" selection-start-line="218" selection-end-line="218" />
+        <state relative-caret-position="270">
+          <caret line="167" column="56" selection-start-line="167" selection-start-column="56" selection-end-line="167" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/codeofthewe/salvo/RestControllerGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="685">
-          <caret line="216" column="12" selection-start-line="216" selection-start-column="8" selection-end-line="216" selection-end-column="12" />
+        <state relative-caret-position="291">
+          <caret line="248" column="55" selection-start-line="248" selection-start-column="55" selection-end-line="248" selection-end-column="55" />
           <folding>
-            <element signature="e#1187#1831#0" />
-            <element signature="e#3292#3523#0" />
-            <element signature="e#3528#3836#0" />
-            <element signature="e#3861#4157#0" />
-            <element signature="e#4163#4402#0" />
-            <element signature="e#4408#4778#0" />
-            <element signature="e#4784#5234#0" />
-            <element signature="e#6190#6359#0" />
-            <element signature="e#7576#7775#0" />
-            <element signature="e#10491#10499#0" expanded="true" />
-            <element signature="e#12513#12684#0" />
-            <element signature="e#14338#14575#0" />
-            <element signature="e#14881#15328#0" />
+            <element signature="e#13791#13799#0" expanded="true" />
+            <element signature="e#14096#14104#0" expanded="true" />
           </folding>
         </state>
       </provider>
