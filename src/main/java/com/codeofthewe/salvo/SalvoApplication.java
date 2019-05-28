@@ -223,8 +223,7 @@ public class SalvoApplication {
 			salvoRepository.save(salvo3);
 			List<String> listSalvo_4 = new ArrayList<String>();
 			listSalvo_4.add("E1");
-			listSalvo_4.add("H3");
-
+			listSalvo_4.add("H5");
 			Salvo salvo4 = new Salvo(2, gp2, listSalvo_4);
 			salvoRepository.save(salvo4);
 

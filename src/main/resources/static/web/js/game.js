@@ -9,9 +9,12 @@ var salvoJSON;
 var salvoPositions = [];
 var waitState = false;
 
+//CODIGO PARA VERIFICAR MEDOTOS
 //postShipLocations("/games/players/{gamePlayerId}/ships");
-postShipLocations(makePostUrl());
-postSalvo(makePostUrlSalvoes());
+//postShipLocations(makePostUrl());
+//postSalvo(makePostUrlSalvoes());
+//refreshGameView(makeUrl());
+
 refreshGameView(makeUrl());
 
 
@@ -84,6 +87,13 @@ function refreshGameView(_url) {
             }
             if (gamePlayerData.gameState === "WAITINGFOROPP"){
                 $('#battleGrids').show('puff', 'slow');
+                setTimeout(
+                            function()
+                            {
+                                refreshGameView(makeUrl());
+                                console.log("...refreshing gameview SIMPLE...");
+
+                            }, 10000);
             }
 
             if (gamePlayerData.gameState === "WON"){
@@ -295,8 +305,8 @@ function createTable(player) {
 function postShipLocations (postUrl) {
     $.post({
         url: postUrl,
-        //data: shipsJSON,
-        data: JSON.stringify([{type: "destroyer", locations: ["A1", "A2", "A3"]},{type: "Submarine", locations: ["B1", "B2", "B3"]}]),
+        data: shipsJSON,
+        //data: JSON.stringify([{type: "destroyer", locations: ["A1", "A2", "A3"]},{type: "submarine", locations: ["B1", "B2", "B3"]}]),
         dataType: "text",
         contentType: "application/json"
     })
@@ -323,8 +333,8 @@ function postShipLocations (postUrl) {
 function postSalvo (postUrl) {
     $.post({
         url: postUrl,
-        //data: salvoJSON,
-        data: JSON.stringify({turn: 3, locations: ["A1", "A2", "H1"]}),
+        data: salvoJSON,
+        //data: JSON.stringify({turn: 3, locations: ["A1", "A2", "H1"]}),
         dataType: "text",
         contentType: "application/json"
     })
@@ -391,8 +401,11 @@ function makeSalvoJSON() {
         salvoPositions.push(salvo5cellID);
     }
     salvoObject = {
-        salvoLocations : salvoPositions
+        //salvoLocations : salvoPositions
+        turn : getTurn(gamePlayerData),
+        locations: salvoPositions
     }
+
 
     salvoJSON = JSON.stringify(salvoObject);
     console.log(salvoJSON);
