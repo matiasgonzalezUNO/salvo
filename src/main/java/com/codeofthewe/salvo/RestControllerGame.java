@@ -463,19 +463,19 @@ public class RestControllerGame {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         //GamePlayer gamePlayerOponente = gP_Oponente;
         GamePlayer gamePlayerOponente = buscarGamePlayerOponente(game, gameplayer);
-        carrierDamage = 0;
+        /*carrierDamage = 0;
         battleshipDamage = 0;
         submarineDamage = 0;
         destroyerDamage = 0;
-        patrolboatDamage = 0;
+        patrolboatDamage = 0;*/
         //dto.put("self", getHits(gameplayer, gamePlayerOponente));
         dto.put("self", getHits(gamePlayerOponente, gameplayer));
 
-        carrierDamage = 0;
+        /*carrierDamage = 0;
         battleshipDamage = 0;
         submarineDamage = 0;
         destroyerDamage = 0;
-        patrolboatDamage = 0;
+        patrolboatDamage = 0;*/
         //dto.put("opponent", getHits(gamePlayerOponente,gameplayer));
         dto.put("opponent", getHits(gameplayer, gamePlayerOponente));
 
@@ -496,7 +496,11 @@ public class RestControllerGame {
 
     private List<Object> getHits(GamePlayer gamePlayerHit, GamePlayer gamePlayerOponenteHit){
         //gamePlayer.getGamePlayerOfship().stream().map(ship -> armarDtoShip(ship)).collect(toList()));
-
+        carrierDamage = 0;
+        battleshipDamage = 0;
+        submarineDamage = 0;
+        destroyerDamage = 0;
+        patrolboatDamage = 0;
         return gamePlayerHit.getGamePlayerIdOfSalvo().stream()
                 .sorted(Comparator.comparingInt(Salvo::getTurn))
                         .map(salvoTurn -> armarDtoSalvoPorTurno(salvoTurn,gamePlayerOponenteHit)).collect(toList());
@@ -696,7 +700,7 @@ public class RestControllerGame {
                 ships.forEach(ship -> ship.setGamePlayerOfship(gamePlayer));
                 gamePlayer.setGamePlayerOfship(ships.stream().collect(toSet()));
                 shipRepository.saveAll(ships);
-                return new ResponseEntity<>(makeMap("Ok","barcos guardados"), HttpStatus.CREATED);
+                return new ResponseEntity<>(makeMap("OK","barcos guardados"), HttpStatus.CREATED);
             }else{
                 return new ResponseEntity<>(makeMap("error","El jugador ya colocó los barcos en el Juego"), HttpStatus.UNAUTHORIZED);
             }
@@ -745,7 +749,7 @@ public class RestControllerGame {
         } else {
                 Salvoes.setGamePlayerIdOfSalvo(gamePlayer);
                 salvoRepository.save(Salvoes);
-                return new ResponseEntity<>(makeMap("Ok","salvos guardados"), HttpStatus.CREATED);
+                return new ResponseEntity<>(makeMap("OK","salvos guardados"), HttpStatus.CREATED);
         }
     }
 

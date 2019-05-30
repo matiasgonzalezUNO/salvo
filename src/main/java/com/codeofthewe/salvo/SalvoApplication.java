@@ -22,9 +22,6 @@ import org.springframework.security.web.authentication.logout.HttpStatusReturnin
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 @SpringBootApplication
@@ -43,7 +40,7 @@ public class SalvoApplication {
 
 			// save a couple of customers
 
-
+			/*
 			// *-*-*-*-*-*-*-*-*-*-*Program INTRODUCCIÓN JAVA 1 -*-*-*-*-*-*-*-*-*-*-*-*
 			Player p1 = new Player("Jack", "Bauer",
 					"j.bauer@ctu.gov",passwordEncoder.encode("24"));
@@ -227,6 +224,8 @@ public class SalvoApplication {
 			Salvo salvo4 = new Salvo(2, gp2, listSalvo_4);
 			salvoRepository.save(salvo4);
 
+
+			 */
 
 
 		};
